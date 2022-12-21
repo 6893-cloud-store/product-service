@@ -52,28 +52,28 @@ class Categories(db.Model):
     category_name = db.Column(db.String(20))
 
 
-# class Carousels(db.Model):
-#     __tablename__ = 'carousel'
-#     carousel_id = db.Column(db.Integer, primary_key=True)
-#     img_path = db.Column(db.String(200))
-#     describes = db.Column(db.String(50))
-#     product_id = db.Column(db.Integer)
-#     priority = db.Column(db.Integer)
+class Carousels(db.Model):
+    __tablename__ = 'carousel'
+    carousel_id = db.Column(db.Integer, primary_key=True)
+    img_path = db.Column(db.String(200))
+    describes = db.Column(db.String(50))
+    product_id = db.Column(db.Integer)
+    priority = db.Column(db.Integer)
 
 
-# # query all carousel data
-# def select_all():
-#     carousels = Carousels.query.all()
-#     carousels_list = []
-#     for carousel in carousels:
-#         dic = {}
-#         dic['carousel_id'] = carousel.carousel_id
-#         dic['img_path'] = carousel.img_path
-#         dic['describes'] = carousel.describes
-#         dic['product_id'] = carousel.product_id
-#         dic['priority'] = carousel.priority
-#         carousels_list.append(dic)
-#     return carousels_list
+# query all carousel data
+def select_all():
+    carousels = Carousels.query.all()
+    carousels_list = []
+    for carousel in carousels:
+        dic = {}
+        dic['carousel_id'] = carousel.carousel_id
+        dic['img_path'] = carousel.img_path
+        dic['describes'] = carousel.describes
+        dic['product_id'] = carousel.product_id
+        dic['priority'] = carousel.priority
+        carousels_list.append(dic)
+    return carousels_list
 
 
 # 查询所有
@@ -356,14 +356,14 @@ def query_pictures():
     return response
 
 
-# @app.route('/carousel/list', methods=['POST'])
-# def query_carousel():
-#     data = select_all()
-#     res = {
-#         'code': '001',
-#         'data': data
-#     }
-#     return res
+@application.route('/carousel/list', methods=['POST'])
+def query_carousel():
+    data = select_all()
+    res = {
+        'code': '001',
+        'data': data
+    }
+    return res
 
 
 @application.route('/product/search', methods=['POST'])
