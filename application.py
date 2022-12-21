@@ -381,7 +381,20 @@ def product_search():
     id_list = id_list[(current_page-1)*page_size: min(page_size*current_page, len(id_list))]
     data = []
     for id in id_list:
-        data.append(query_by_id(id))
+        s = select_by_id(id)
+        dic = {}
+        dic['product_id'] = s.product_id
+        dic['product_name'] = s.product_name
+        dic['category_id'] = s.category_id
+        dic['product_title'] = s.product_title
+        dic['product_intro'] = s.product_intro
+        dic['product_picture'] = s.product_picture
+        dic['product_price'] = s.product_price
+        dic['product_selling_price'] = s.product_selling_price
+        dic['product_num'] = s.product_num
+        dic['product_sales'] = s.product_sales
+        dic['category_name'] = s.category_name
+        data.append(dic)
     return {'code': '001', 'data': data, 'total': total}
 
 
