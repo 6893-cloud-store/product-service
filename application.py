@@ -374,8 +374,8 @@ def product_search():
     params = {"key": keyword}
     response = requests.post(search_url, json=params)
     print(response)
-    print(response.body)
-    id_list = response.body
+    print(response.text)
+    id_list = response.json()['body']
     print(id_list)
     total = len(id_list)
     id_list = id_list[(current_page-1)*page_size: min(page_size*current_page, len(id_list))]
