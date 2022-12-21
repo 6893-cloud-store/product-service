@@ -1,12 +1,11 @@
 import boto3
 import pymysql
-from elasticsearch import Elasticsearch
 import requests
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask import request
 
-search_url = "http://Cloudsearch-env.eba-gr976pa4.us-east-1.elasticbeanstalk.com/elasticsearch"
+search_url = "http://Cloudsearch-env.eba-gr976pa4.us-east-1.elasticbeanstalk.com:8000/elasticsearch"
 topic_arn = "arn:aws:sns:us-east-1:964216032660:6156_to_lambda"
 
 pymysql.install_as_MySQLdb()
@@ -373,11 +372,10 @@ def product_search():
     current_page = request.get_json().get('currentPage')
     page_size = request.get_json().get('pageSize')
     params = {"key": keyword}
-    headers = {"accept": "application/json"}
-    response = requests.post(search_url, params=params, headers=headers)
+    response = requests.post(search_url, json=params)
     print(response)
-    print(response.json())
-    id_list = response.json().get('body')
+    print(response.body)
+    id_list = response.body
     print(id_list)
     total = len(id_list)
     id_list = id_list[(current_page-1)*page_size: min(page_size*current_page, len(id_list))]
