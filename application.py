@@ -5,7 +5,7 @@ from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask import request
 
-search_url = "http://Cloudsearch-env.eba-gr976pa4.us-east-1.elasticbeanstalk.com:8000/elasticsearch"
+search_url = "http://Cloudsearch-env.eba-gr976pa4.us-east-1.elasticbeanstalk.com/elasticsearch"
 topic_arn = "arn:aws:sns:us-east-1:964216032660:6156_to_lambda"
 
 pymysql.install_as_MySQLdb()
